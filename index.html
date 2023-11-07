@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inspiration&display=swap" rel="stylesheet">
+    <style>
+        body {
+            text-align: center;
+            background-color: teal;
+        }
+
+        h1 {
+            font-family: 'Inspiration', cursive;
+            font-size: 50px;
+        }
+
+        #progress {
+            margin: 20px auto;
+            width: 80%;
+            height: 40px;
+            background-color: black;
+            position: relative;
+    
+        }
+
+        #bar {
+            background-color: goldenrod;
+            width: 0;
+            height: 40px;
+            position: absolute;
+        }
+
+        #load {
+            font-size: 36px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Downloading progress</h1>
+    <div id="progress">
+        <div id="bar"></div>
+    </div>
+    <p id="load"></p>
+
+    <script>
+        let pg = document.getElementById("progress")
+        let pb = document.getElementById("bar");
+        let pl = document.getElementById("load");
+        let bw = 0;
+
+        const down = () => {
+            bw++;
+            pb.style.width = `${bw}%`;
+            setTimeout(() => {
+                pl.innerHTML = (bw === 100) ? `${bw}% Completed` : `${bw}% Progress`;
+                if (bw === 100) {
+                    document.body.style.backgroundColor = 'goldenrod';
+                }
+            }, 1000);
+        };
+
+        setTimeout(() => {
+            let iid = setInterval(() => {
+                if (bw === 100) {
+                    clearInterval(iid);
+                } else {
+                    down();
+                }
+            }, 100);
+        }, 2000);
+    </script>
+</body>
+</html>
